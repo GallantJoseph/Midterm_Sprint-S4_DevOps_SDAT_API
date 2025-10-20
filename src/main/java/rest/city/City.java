@@ -1,0 +1,88 @@
+package rest.city;
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import rest.airport.Airport;
+import rest.passenger.Passenger;
+
+@Entity
+@SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1, initialValue=1)
+public class City {
+
+    @Id
+    @GeneratedValue(generator = "city_sequence")
+
+    private int id;
+    private String name;
+    private String province;
+    private int population;
+
+    @OneToMany
+    private List<Airport> airports;
+
+    @OneToMany
+    private List<Passenger> passengers;
+
+    public City() {
+
+    };
+
+    public City(String name, String province, int population) {
+        this.name = name;
+        this.province = province;
+        this.population = population;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+}
