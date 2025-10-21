@@ -11,10 +11,10 @@ import rest.airport.Airport;
 import rest.passenger.Passenger;
 
 @Entity
-@SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1, initialValue=1)
 public class City {
 
     @Id
+    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(generator = "city_sequence")
 
     private int id;

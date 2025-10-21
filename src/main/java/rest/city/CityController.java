@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/cities")
@@ -13,5 +15,14 @@ public class CityController {
     
     @Autowired
     private CityService cityService;
-    
+
+    @PostMapping
+    public City createCity(@RequestBody City city) {
+        return cityService.createCity(city);
+    }
+
+    @GetMapping
+    public List<City> getAllCities(){
+        return cityService.getAllCities();
+    }
 }
