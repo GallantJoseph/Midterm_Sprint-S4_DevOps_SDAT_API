@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import rest.airport.Airport;
 import rest.passenger.Passenger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,16 +13,15 @@ public class Aircraft {
     @SequenceGenerator(name = "aircraft_sequence", sequenceName = "aircraft_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aircraft_sequence")
     private Long id;
-
     private String type;
     private String airlineName;
     private int numberOfPassengers;
 
     @ManyToMany
-    private List<Passenger> passengers;
+    private List<Passenger> passengers = new ArrayList<>();
 
     @ManyToMany
-    private List<Airport> airports;
+    private List<Airport> airports = new ArrayList<>();
 
     public Aircraft() {
     }
@@ -72,19 +72,15 @@ public class Aircraft {
         this.passengers = passengers;
     }
 
-    public List<Airport> getAirport() {
-        return airports;
-    }
-
-    public void setAirport(List<Airport> airports) {
-        this.airports = airports;
-    }
-
     public List<Airport> getAirports() {
         return airports;
     }
 
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
+    }
+    @Override
+    public String toString() {
+        return "Aircraft( id = " + id + ", type = " + type + ", airlineName = " + airlineName + " )";
     }
 }
