@@ -15,9 +15,8 @@ public class AircraftService {
     private AircraftRepository aircraftRepository;
 
     @Autowired
-    private  AirportRepository airportRepository;
+    private AirportRepository airportRepository;
 
-  // added to match teachers format of casting.
     public Iterable<Aircraft> getAllAircraft() {
         return  aircraftRepository.findAll();
     }

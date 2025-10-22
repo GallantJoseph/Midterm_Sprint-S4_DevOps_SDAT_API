@@ -10,15 +10,8 @@ import java.util.List;
 @Entity
 public class Aircraft {
     @Id
-    @SequenceGenerator(
-            name = "aircraft_sequence",
-            sequenceName = "aircraft_sequence",
-            allocationSize = 1,
-            initialValue = 1)
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "aircraft_sequence"
-    )
+    @SequenceGenerator(name = "aircraft_sequence", sequenceName = "aircraft_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aircraft_sequence")
     private Long id;
     private String type;
     private String airlineName;

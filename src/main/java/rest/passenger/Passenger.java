@@ -9,10 +9,10 @@ import java.util.List;
 @Entity
 public class Passenger {
     @Id
-    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(generator = "city_sequence")
 
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String phone;
@@ -33,11 +33,11 @@ public class Passenger {
         this.phone = phone;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
