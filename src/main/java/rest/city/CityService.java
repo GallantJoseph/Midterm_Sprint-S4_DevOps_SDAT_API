@@ -2,8 +2,7 @@ package rest.city;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CityService {
@@ -18,19 +17,24 @@ public class CityService {
         return cityRepository.findById(id).orElse(null);
     }
 
-    public List<City> getAllCities(){
-        return (List<City>) cityRepository.findAll();
+    public Iterable<City> getAllCities(){
+        return cityRepository.findAll();
     }
 
     public City updateCity(long id, City updatedCity) {
-        return cityRepository.findById(id)
-                .map(city -> {
-                    city.setName(updatedCity.getName());
-                    city.setProvince(updatedCity.getProvince());
-                    city.setPopulation(updatedCity.getPopulation());
-                    return cityRepository.save(city);
-                })
-                .orElse(null);
+        Optional<City> cityToUpdateOptional = cityRepository.findById(id);
+
+        if (cityToUpdateOptional.isPresent()) {
+            City cityToUpdate = cityToUpdateOptional.get();
+
+            cityToUpdate.setName(updatedCity.getName());
+            cityToUpdate.setProvince(updatedCity.getProvince());
+            cityToUpdate.setPopulation(updatedCity.getPopulation());
+
+            return cityRepository.save(cityToUpdate);
+        }
+
+        return null;
     }
 
     public void deleteCity(long id) {

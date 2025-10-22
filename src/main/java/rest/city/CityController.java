@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
 @RestController
 @RequestMapping("/cities")
 @CrossOrigin
@@ -28,7 +25,7 @@ public class CityController {
     }
 
     @GetMapping
-    public List<City> getAllCities(){
+    public Iterable<City> getAllCities(){
         return cityService.getAllCities();
     }
 

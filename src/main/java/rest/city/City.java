@@ -17,7 +17,7 @@ public class City {
     @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(generator = "city_sequence")
 
-    private int id;
+    private long id;
     private String name;
     private String province;
     private int population;
@@ -38,11 +38,11 @@ public class City {
         this.population = population;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
