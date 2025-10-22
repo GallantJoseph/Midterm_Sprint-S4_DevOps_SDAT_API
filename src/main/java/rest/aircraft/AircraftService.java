@@ -14,6 +14,9 @@ public class AircraftService {
     @Autowired
     private AircraftRepository aircraftRepository;
 
+    @Autowired
+    private AirportRepository airportRepository;
+
     public Iterable<Aircraft> getAllAircraft() {
         return  aircraftRepository.findAll();
     }
