@@ -1,5 +1,6 @@
 package rest.city;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -8,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import rest.airport.Airport;
-import rest.passenger.Passenger;
 
 @Entity
 public class City {
@@ -23,10 +23,7 @@ public class City {
     private int population;
 
     @OneToMany
-    private List<Airport> airports;
-
-    @OneToMany
-    private List<Passenger> passengers;
+    private List<Airport> airports = new ArrayList<>();
 
     public City() {
 
@@ -76,13 +73,5 @@ public class City {
 
     public void setAirports(List<Airport> airports) {
         this.airports = airports;
-    }
-
-    public List<Passenger> getPassengers() {
-        return passengers;
-    }
-
-    public void setPassengers(List<Passenger> passengers) {
-        this.passengers = passengers;
     }
 }

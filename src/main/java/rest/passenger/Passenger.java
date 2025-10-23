@@ -1,10 +1,7 @@
 package rest.passenger;
 
 import jakarta.persistence.*;
-import rest.aircraft.Aircraft;
 import rest.city.City;
-
-import java.util.List;
 
 @Entity
 public class Passenger {
@@ -19,9 +16,6 @@ public class Passenger {
 
     @ManyToOne
     private City city;
-
-    @ManyToMany
-    private List<Aircraft> aircraftList;
 
     public Passenger() {
 
@@ -71,13 +65,5 @@ public class Passenger {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public List<Aircraft> getAircraft() {
-        return aircraftList;
-    }
-
-    public void setAircraft(List<Aircraft> aircraftList) {
-        this.aircraftList = aircraftList;
     }
 }
