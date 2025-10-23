@@ -57,7 +57,6 @@ public class AircraftService {
         }
     }
 
-
     // can also be fixed if we esablish the new arrayList<> in class files
     public void addAirportToAircraft(Long aircraftId, Long airportId){
         Optional<Aircraft> aircraftOptional = aircraftRepository.findById(aircraftId);
@@ -65,14 +64,9 @@ public class AircraftService {
         if (aircraftOptional.isPresent() && airportOptional.isPresent()) {
             Aircraft aircraft = aircraftOptional.get();
             Airport airport = airportOptional.get();
-            if (airport.getAircraftList() == null) {
-                airport.setAircraftList(new ArrayList<>());
-            }
             aircraft.getAirports().add(airport);
-            airport.getAircraftList().add(aircraft);
             aircraftRepository.save(aircraft);
             airportRepository.save(airport);
         }
     }
 }
-
