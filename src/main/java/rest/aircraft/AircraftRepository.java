@@ -1,8 +1,8 @@
 package rest.aircraft;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AircraftRepository extends org.springframework.data.repository.CrudRepository<Aircraft, Long>  {
-
+public interface AircraftRepository extends CrudRepository<Aircraft, Long>  {
 }
