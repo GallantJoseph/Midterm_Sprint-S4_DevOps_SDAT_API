@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -24,9 +23,6 @@ public class Airport {
 
     @ManyToOne
     private City city;
-
-    @ManyToMany
-    private List<Aircraft> aircraftList;
 
     public Airport() {
     }
@@ -67,13 +63,5 @@ public class Airport {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public List<Aircraft> getAircraftList() {
-        return aircraftList;
-    }
-
-    public void setAircraftList(List<Aircraft> aircraftList) {
-        this.aircraftList = aircraftList;
     }
 }

@@ -2,6 +2,7 @@ package rest.airport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rest.aircraft.AircraftService;
 
 import java.util.Optional;
 
@@ -9,6 +10,9 @@ import java.util.Optional;
 public class AirportService {
     @Autowired
     private AirportRepository airportRepository;
+
+    @Autowired
+    private AircraftService aircraftService;
 
     public Iterable<Airport> getAllAirports() {
         return airportRepository.findAll();
@@ -35,7 +39,6 @@ public class AirportService {
             airportToUpdate.setName(airport.getName());
             airportToUpdate.setCity(airport.getCity());
             airportToUpdate.setCode(airport.getCode());
-            airportToUpdate.setAircraftList(airport.getAircraftList());
 
             airportRepository.save(airportToUpdate);
         }
