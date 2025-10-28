@@ -27,7 +27,7 @@ public class AirportController {
     }
 
     @PostMapping
-    public Airport addNewAirport(@RequestBody Airport airport) { return airportService.addNewAirport(airport); }
+    public Airport addNewAirport(@RequestBody Airport airport, @RequestParam("city_id") long city_id) { return airportService.addNewAirport(airport, city_id); }
 
     @DeleteMapping("/{id}")
     public Optional<Airport> removeAirport(@PathVariable("id") long id) {
