@@ -71,4 +71,11 @@ public class AircraftController {
         aircraftService.addAirportToAircraft(id, airportId);
         return ResponseEntity.ok().build();
     }
+
+    // Question 2 Aircraft by passenger
+    @PostMapping("/{id}/passengers/{passengerId}")
+    public ResponseEntity<Void> addPassenger(@PathVariable Long id, @PathVariable Long passengerId){
+        aircraftService.addPassengerToAircraft(id, passengerId);
+        return ResponseEntity.ok().build();
+    }
 }

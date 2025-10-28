@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.airport.Airport;
 import rest.airport.AirportRepository;
+import rest.passenger.Passenger;
+import rest.passenger.PassengerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,9 @@ public class AircraftService {
 
     @Autowired
     private AirportRepository airportRepository;
+
+    @Autowired
+    private PassengerRepository passengerRepository;
 
     public Iterable<Aircraft> getAllAircraftByPassengerId (Long passengerId) {
         return aircraftRepository.findAllByPassengers_Id(passengerId);
@@ -65,6 +70,18 @@ public class AircraftService {
             Aircraft aircraft = aircraftOptional.get();
             Airport airport = airportOptional.get();
             aircraft.getAirports().add(airport);
+            aircraftRepository.save(aircraft);
+        }
+    }
+
+    public void addPassengerToAircraft(Long aircraftId, Long passengerId){
+        Optional<Aircraft> aircraftOptional = aircraftRepository.findById(aircraftId);
+        Optional<Passenger> passengerOptional = passengerRepository.findById(passengerId);
+
+        if (aircraftOptional.isPresent() && passengerOptional.isPresent()) {
+            Aircraft aircraft = aircraftOptional.get();
+            Passenger passenger = passengerOptional.get();
+            aircraft.getPassengers().add(passenger);
             aircraftRepository.save(aircraft);
         }
     }
