@@ -3,6 +3,8 @@ package rest.airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.aircraft.AircraftService;
+import rest.city.City;
+import rest.city.CityRepository;
 
 import java.util.Optional;
 
@@ -14,6 +16,9 @@ public class AirportService {
     @Autowired
     private AircraftService aircraftService;
 
+    @Autowired
+    private CityRepository cityRepository;
+
     public Iterable<Airport> getAllAirports() {
         return airportRepository.findAll();
     }
@@ -22,7 +27,9 @@ public class AirportService {
         return airportRepository.findById(id);
     }
 
-    public Airport addNewAirport(Airport airport) {
+    public Airport addNewAirport(Airport airport, long city_id) {
+        Optional<City> city = cityRepository.findById(city_id);
+        city.ifPresent(airport::setCity);
         return airportRepository.save(airport);
     }
 
