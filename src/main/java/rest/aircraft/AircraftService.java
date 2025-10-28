@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import rest.airport.Airport;
 import rest.airport.AirportRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +15,10 @@ public class AircraftService {
 
     @Autowired
     private AirportRepository airportRepository;
+
+    public Iterable<Aircraft> getAllAircraftByPassengerId (Long passengerId) {
+        return aircraftRepository.findAllByPassengers_Id(passengerId);
+    }
 
     public Iterable<Aircraft> getAllAircraft() {
         return  aircraftRepository.findAll();

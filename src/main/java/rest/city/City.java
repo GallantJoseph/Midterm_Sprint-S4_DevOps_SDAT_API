@@ -1,14 +1,9 @@
 package rest.city;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
-import rest.airport.Airport;
 
 @Entity
 public class City {
@@ -21,9 +16,6 @@ public class City {
     private String name;
     private String province;
     private int population;
-
-    @OneToMany
-    private List<Airport> airports = new ArrayList<>();
 
     public City() {
 
@@ -65,13 +57,5 @@ public class City {
 
     public void setPopulation(int population) {
         this.population = population;
-    }
-
-    public List<Airport> getAirports() {
-        return airports;
-    }
-
-    public void setAirports(List<Airport> airports) {
-        this.airports = airports;
     }
 }

@@ -14,6 +14,10 @@ public class AirportService {
     @Autowired
     private AircraftService aircraftService;
 
+    public Iterable<Airport> getAllAirportsByCityId(Long cityId){
+        return airportRepository.findAllAirportsByCityId(cityId);
+    }
+
     public Iterable<Airport> getAllAirports() {
         return airportRepository.findAll();
     }
