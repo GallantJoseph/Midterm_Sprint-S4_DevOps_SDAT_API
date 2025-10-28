@@ -22,9 +22,6 @@ public class City {
     private String province;
     private int population;
 
-    @OneToMany
-    private List<Airport> airports = new ArrayList<>();
-
     public City() {
 
     };
@@ -65,13 +62,5 @@ public class City {
 
     public void setPopulation(int population) {
         this.population = population;
-    }
-
-    public List<Airport> getAirports() {
-        return airports;
-    }
-
-    public void setAirports(List<Airport> airports) {
-        this.airports = airports;
     }
 }
