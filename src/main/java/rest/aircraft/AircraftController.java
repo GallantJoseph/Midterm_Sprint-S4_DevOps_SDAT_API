@@ -9,51 +9,66 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping({"/aircraft"})
+@RequestMapping("/aircraft")
 @CrossOrigin
 public class AircraftController {
     @Autowired
     private AircraftService aircraftService;
 
-    @GetMapping({""})
-    public ResponseEntity<Iterable<Aircraft>> getAllAircraft(){
+    @GetMapping
+    public ResponseEntity<Iterable<Aircraft>> getAll(){
         return ResponseEntity.ok(aircraftService.getAllAircraft());
     }
 
-    @GetMapping({"/passenger/{id}"})
-    public Iterable<Aircraft> getAllAircraftByPassengerId(@PathVariable Long id){
-        return aircraftService.getAllAircraftByPassengerId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Aircraft> getById(@PathVariable Long id){
+        Aircraft aircraft = aircraftService.getAircraftById(id);
+        if (aircraft == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(aircraft);
     }
 
-    @GetMapping({"/{id}"})
-        public ResponseEntity<Aircraft> getAircraftById(@PathVariable Long id){
-        return ResponseEntity.ok(aircraftService.getAircraftById(id));
-        }
-
-    @PostMapping({""})
-    public ResponseEntity<Aircraft> createAircraft(@RequestBody Aircraft aircraft){
+    @PostMapping
+    public ResponseEntity<Aircraft> create(@RequestBody Aircraft aircraft){
         return ResponseEntity.ok(aircraftService.createAircraft(aircraft));
     }
 
-    @PutMapping({"/{id}"})
-    public ResponseEntity<Aircraft> updateAircraft(@PathVariable Long id, @RequestBody Aircraft aircraft){
-        return ResponseEntity.ok(aircraftService.updateAircraft(id, aircraft));
+    @PutMapping("/{id}")
+    public ResponseEntity<Aircraft> update(@PathVariable Long id, @RequestBody Aircraft aircraft){
+        Aircraft updated = aircraftService.updateAircraft(id, aircraft);
+        if (updated == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updated);
     }
-    @DeleteMapping({"/{id}"})
-    public void deleteAircraftById(@PathVariable Long id){
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         aircraftService.deleteAircraftById(id);
+        return ResponseEntity.noContent().build();
     }
 
-    // TODO ********** REVIEW WITH TEAM TO FIX *********
+    // Question 2 Aircraft by passenger
+    @GetMapping("/passenger/{id}")
+    public ResponseEntity<Iterable<Aircraft>> getByPassenger(@PathVariable Long id){
+        return ResponseEntity.ok(aircraftService.getAllAircraftByPassengerId(id));
+    }
 
-    @GetMapping({"/{id}/airports"})
-    public ResponseEntity<List<Airport>> getAirportsByAircraft(@PathVariable Long id){
-        return ResponseEntity.ok(aircraftService.getAirportsByAircraft(id));
+    // Question 3 Airports by aircraft
+    @GetMapping("/{id}/airports")
+    public ResponseEntity<List<Airport>> getAirports(@PathVariable Long id){
+        List<Airport> airport = aircraftService.getAirportsByAircraft(id);
+        if (airport == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(airport);
     }
 
     // we need this for Question 3
-    @PostMapping({"/{id}/airports/{airportId}"})
-    public void addAirportToAircraft(@PathVariable Long id, @PathVariable Long airportId){
+    @PostMapping("/{id}/airports/{airportId}")
+    public ResponseEntity<Void> addAirport(@PathVariable Long id, @PathVariable Long airportId){
         aircraftService.addAirportToAircraft(id, airportId);
+        return ResponseEntity.ok().build();
     }
 }
