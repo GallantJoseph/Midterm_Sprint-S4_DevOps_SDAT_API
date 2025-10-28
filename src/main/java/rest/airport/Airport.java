@@ -1,9 +1,6 @@
 package rest.airport;
 
-import rest.aircraft.Aircraft;
 import rest.city.City;
-
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

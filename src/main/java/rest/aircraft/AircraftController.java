@@ -20,6 +20,11 @@ public class AircraftController {
         return ResponseEntity.ok(aircraftService.getAllAircraft());
     }
 
+    @GetMapping({"/passenger/{id}"})
+    public Iterable<Aircraft> getAllAircraftByPassengerId(@PathVariable Long id){
+        return aircraftService.getAllAircraftByPassengerId(id);
+    }
+
     @GetMapping({"/{id}"})
         public ResponseEntity<Aircraft> getAircraftById(@PathVariable Long id){
         return ResponseEntity.ok(aircraftService.getAircraftById(id));
