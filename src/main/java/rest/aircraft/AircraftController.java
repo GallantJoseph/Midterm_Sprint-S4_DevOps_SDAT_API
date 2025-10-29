@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rest.airport.Airport;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -77,5 +78,23 @@ public class AircraftController {
     public ResponseEntity<Void> addPassenger(@PathVariable Long id, @PathVariable Long passengerId){
         aircraftService.addPassengerToAircraft(id, passengerId);
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/passengers/{passengerId}")
+    public ResponseEntity<Void> removePassengerFromAircraft(@PathVariable Long id, @PathVariable Long passengerId){
+        aircraftService.removePassengerFromAircraft(id, passengerId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/airports/{airportId}")
+    public ResponseEntity<Void> removeAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId){
+        aircraftService.removeAirportFromAircraft(id, airportId);
+        return ResponseEntity.ok().build();
+    }
+
+    // Question 4
+    @GetMapping("/passengers/airports")
+    public Set<Airport> getAirportsUsedByAllPassengers() {
+        return aircraftService.getAirportsUsedByAllPassengers();
     }
 }
