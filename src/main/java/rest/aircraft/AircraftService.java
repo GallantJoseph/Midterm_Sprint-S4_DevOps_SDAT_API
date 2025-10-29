@@ -1,5 +1,6 @@
 package rest.aircraft;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.airport.Airport;
@@ -7,8 +8,10 @@ import rest.airport.AirportRepository;
 import rest.passenger.Passenger;
 import rest.passenger.PassengerRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AircraftService {
@@ -24,6 +27,29 @@ public class AircraftService {
     public Iterable<Aircraft> getAllAircraftByPassengerId (Long passengerId) {
         return aircraftRepository.findAllByPassengers_Id(passengerId);
     }
+
+    public Set<Airport> getAirportsUsedByAllPassengers() {
+        Set<Airport> result = new HashSet<>();
+
+        // Get all passengers from repository
+        Iterable<Passenger> passengers = passengerRepository.findAll();
+
+        for (Passenger passenger : passengers) {
+            Iterable<Aircraft> aircraftList = aircraftRepository.findAllByPassengers_Id(passenger.getId());
+
+            for (Aircraft aircraft : aircraftList) {
+                List<Airport> airports = aircraft.getAirports();
+
+                if (airports != null) {
+                    for (Airport airport : airports) {
+                        result.add(airport);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 
     public Iterable<Aircraft> getAllAircraft() {
         return  aircraftRepository.findAll();
@@ -84,5 +110,31 @@ public class AircraftService {
             aircraft.getPassengers().add(passenger);
             aircraftRepository.save(aircraft);
         }
+    }
+
+    @Transactional
+    public void removePassengerFromAircraft(Long aircraftId, Long passengerId) {
+        Aircraft aircraft = aircraftRepository.findById(aircraftId)
+                .orElseThrow(() -> new RuntimeException("Aircraft not found"));
+
+        Passenger passenger = passengerRepository.findById(passengerId)
+                .orElseThrow(() -> new RuntimeException("Passenger not found"));
+
+        aircraft.getPassengers().remove(passenger);
+
+        aircraftRepository.save(aircraft);
+    }
+
+    @Transactional
+    public void removeAirportFromAircraft(Long aircraftId, Long airportId) {
+        Aircraft aircraft = aircraftRepository.findById(aircraftId)
+                .orElseThrow(() -> new RuntimeException("Aircraft not found"));
+
+        Airport airport = airportRepository.findById(airportId)
+                .orElseThrow(() -> new RuntimeException("Airport not found"));
+
+        aircraft.getAirports().remove(airport);
+
+        aircraftRepository.save(aircraft);
     }
 }
