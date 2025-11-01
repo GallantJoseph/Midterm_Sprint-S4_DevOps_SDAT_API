@@ -22,8 +22,8 @@ public class AirportController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Airport> getAirport(@PathVariable("id") long id) {
-        return airportService.getAirport(id);
+    public Optional<Airport> getAirportById(@PathVariable("id") long id) {
+        return airportService.getAirportById(id);
     }
 
     @GetMapping("/city/{id}")
@@ -35,7 +35,7 @@ public class AirportController {
     public Airport addNewAirport(@RequestBody Airport airport, @RequestParam("city_id") long city_id) { return airportService.addNewAirport(airport, city_id); }
 
     @DeleteMapping("/{id}")
-    public Optional<Airport> removeAirport(@PathVariable("id") long id) {
+    public Optional<Airport> deleteAirport(@PathVariable("id") long id) {
         return airportService.removeAirport(id);
     }
 

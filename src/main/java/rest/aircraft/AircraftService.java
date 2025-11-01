@@ -31,7 +31,6 @@ public class AircraftService {
     public Set<Airport> getAirportsUsedByAllPassengers() {
         Set<Airport> result = new HashSet<>();
 
-        // Get all passengers from repository
         Iterable<Passenger> passengers = passengerRepository.findAll();
 
         for (Passenger passenger : passengers) {
@@ -79,7 +78,7 @@ public class AircraftService {
         aircraftRepository.deleteById(id);
     }
 
-    public List<Airport> getAirportsByAircraft(Long id){
+    public List<Airport> getAirportsByAircraftId(Long id){
         Optional<Aircraft> aircraftOptional = aircraftRepository.findById(id);
         if (aircraftOptional.isPresent()){
             return aircraftOptional.get().getAirports();

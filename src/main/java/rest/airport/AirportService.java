@@ -2,7 +2,6 @@ package rest.airport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rest.aircraft.AircraftService;
 import rest.city.City;
 import rest.city.CityRepository;
 
@@ -12,9 +11,6 @@ import java.util.Optional;
 public class AirportService {
     @Autowired
     private AirportRepository airportRepository;
-
-    @Autowired
-    private AircraftService aircraftService;
 
     @Autowired
     private CityRepository cityRepository;
@@ -27,7 +23,7 @@ public class AirportService {
         return airportRepository.findAll();
     }
 
-    public Optional<Airport> getAirport(long id) {
+    public Optional<Airport> getAirportById(long id) {
         return airportRepository.findById(id);
     }
 
