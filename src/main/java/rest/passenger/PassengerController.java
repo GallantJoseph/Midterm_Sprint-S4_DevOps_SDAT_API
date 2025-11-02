@@ -30,8 +30,8 @@ public class PassengerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Passenger> updatePassenger(@PathVariable long id, @RequestBody Passenger passenger) {
-        return ResponseEntity.ok(passengerService.updatePassenger(id, passenger));
+    public ResponseEntity<Passenger> updatePassenger(@PathVariable long id, @RequestBody Passenger passenger, @RequestParam Long cityId) {
+        return ResponseEntity.ok(passengerService.updatePassenger(id, passenger, cityId));
     }
 
     @DeleteMapping("/{id}")
